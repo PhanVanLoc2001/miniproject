@@ -37,7 +37,7 @@ switch ($action) {
 					setcookie ("email",$_POST["email"],time()+ 3600);
 					setcookie ("password",$_POST["password"],time()+ 3600);	
 				} 
-				header("location:?action=user");
+				header("location:?controller=UserController&action=user");
 				exit;
 			}
 			else {

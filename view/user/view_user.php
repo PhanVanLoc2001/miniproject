@@ -2,7 +2,6 @@
 include 'user_page.php' ;
 
 ?>
-<body>
   <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -24,4 +23,3 @@ include 'user_page.php' ;
     </tbody>
   </table>
 </div>
-</body>

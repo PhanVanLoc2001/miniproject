@@ -1,4 +1,3 @@
 <?php 
-require 'controller/UserController.php';
-
+require './controller/index.php';
  ?>
