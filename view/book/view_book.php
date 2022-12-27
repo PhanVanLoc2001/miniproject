@@ -63,7 +63,7 @@ if(empty($_SESSION['ID']))
                             </div>
                             <div class="mb-3">
                                 <label for="des" class="form-label">Mô tả</label>
-                                <textarea name="description" class="form-control" id="$description" rows="3"></textarea>
+                                <textarea name="description" class="form-control" id="$description" rows="6"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -87,7 +87,63 @@ if(empty($_SESSION['ID']))
             </tr>
             </thead>
             <tbody>
-            <!--   Code update & delete -->
+            <?php if(isset($data)){ ?>
+                <?php foreach ($data as $book) {?>
+                    <tr>
+                        <td><?php echo $book['id']?></td>
+                        <td> <?php echo $book['title']?> </td>
+                        <td> <?php echo $book['author']?> </td>
+                        <td> <?php echo $book['published_date']?> </td>
+                        <td> <?php echo $book['publisher']?> </td>
+                        <td><i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target=<?php echo "#editBook".$book['id']?>></i></td>
+                        <td><a href= <?php echo"?controller=BookController&action=delete&id=". $book['id'] ?>><i class="bi bi-trash"></a></i></td>
+                        <form action=<?php echo "?controller=BookController&action=edit"?> <?php echo $book['id']?> method="POST" enctype="multipart/form-data">
+                            <!-- Modal -->
+                            <div class="modal fade" id=<?php echo "editBook".$book['id']?> tabindex="-1" aria-labelledby="createBook" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Sửa sách </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input class="d-none" name="id" type="text" value=<?php echo $book['id']?>>
+                                            <div class="row">
+                                                <div class="col-8 mb-2 mx-0">
+                                                    <label for="title" class="form-label">Tên sách</label>
+                                                    <input type="title" value=<?php echo $book['title']?> name="title" class="form-control" id="title">
+                                                </div>
+                                                <div class="col-4 mb-2 mx-0">
+                                                    <label for="author" class="form-label">Tác giả</label>
+                                                    <input type="author" value=<?php echo $book['author']?> name="author" class="form-control" id="author">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4 mb-2 mx-0">
+                                                    <label for="published_date" class="form-label">Năm xuất bản</label>
+                                                    <input type="published_date" value="<?php echo $book['published_date']?> " name="published_date" class="form-control" id="published_date">
+                                                </div>
+                                                <div class="col-8 mb-2 mx-0">
+                                                    <label for="publisher" class="form-label">Nhà xuất bản</label>
+                                                    <input type="publisher" value="<?php echo $book['publisher']?>" name="publisher" class="form-control" id="publisher">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="des" class="form-label">Mô tả</label>
+                                                <textarea name="description" class="form-control" id="$description" rows="6"><?php echo $book['description']?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                            <button type="submit" name="btnSubmitBook" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </tr>
+                 <?php } ?>
+            <?php } ?>
             </tbody>
         </table>
     </div>
@@ -103,17 +159,5 @@ if(empty($_SESSION['ID']))
     </div>
 </div>
 
-<?php
-//echo '<script type="text/JavaScript">
-//        const option={
-//            animation:true,
-//            autohide:false,
-//            delay:3000,
-//        }
-//       var myToastEl = document.getElementById("myToast")
-//       var element = new bootstrap.Toast(myToastEl,option)
-//      element.show();
-//     </script>';
-//?>
 <?php include "view/layout/footer.php"?>
 

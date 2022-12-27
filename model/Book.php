@@ -34,5 +34,16 @@ class Book
         $result = $db->command($sql);
         return $result;
     }
-
+    static function edit($id,$title,$author,$published_date,$publisher,$description){
+        $db = new DB();
+        $sql = "UPDATE book set title='$title', author='$author', published_date='$published_date', publisher='$publisher', description='$description' WHERE id ='$id'";
+        $result = $db->command($sql);
+        return $result;
+    }
+    static function delete($id){
+        $db = new DB();
+        $sql = "DELETE FROM book WHERE id ='$id'";
+        $result = $db->command($sql);
+        return $result;
+    }
 }
